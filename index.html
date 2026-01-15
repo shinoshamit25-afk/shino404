@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shino Shamit — Cybersecurity Portfolio</title>
+  <meta name="description" content="Shino Shamit — Cybersecurity Portfolio (SOC, Detection, Threat Hunting, Incident Response)" />
+
+  <style>
+    :root{
+      --bg: #070b16;
+      --panel: rgba(255,255,255,0.06);
+      --panel-2: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --line: rgba(255,255,255,0.14);
+      --blue: #4da3ff;
+      --blue2:#7c5cff;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% -10%, rgba(77,163,255,0.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(124,92,255,0.22), transparent 55%),
+        radial-gradient(700px 500px at 55% 110%, rgba(77,163,255,0.16), transparent 55%),
+        linear-gradient(180deg, #050814, #070b16 40%, #060913);
+      overflow-x:hidden;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 60px; }
+
+    /* NAV */
+    .nav{
+      position:sticky; top:10px; z-index:10;
+      backdrop-filter: blur(14px);
+      background: rgba(10,14,30,0.55);
+      border:1px solid var(--line);
+      border-radius:999px;
+      box-shadow: var(--shadow);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 14px;
+      gap:12px;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; padding-left:6px; }
+    .dot{
+      width:12px; height:12px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff, var(--blue));
+      box-shadow: 0 0 0 5px rgba(77,163,255,0.14);
+    }
+    .brand strong{ font-weight:700; letter-spacing:0.2px; }
+    .brand span{ color:var(--muted); font-size:13px; margin-left:6px; }
+
+    .links{ display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
+    .links a{
+      padding:10px 12px; border-radius:999px;
+      color:var(--muted);
+      border:1px solid transparent;
+      transition: 160ms ease;
+      font-size:14px;
+    }
+    .links a:hover{ color:var(--text); border-color:var(--line); background:rgba(255,255,255,0.04); }
+
+    /* BUTTONS */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(77,163,255,0.28);
+      background: linear-gradient(180deg, rgba(77,163,255,0.18), rgba(77,163,255,0.08));
+      box-shadow: 0 10px 30px rgba(77,163,255,0.18);
+      transition: 160ms ease;
+      gap:10px;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(77,163,255,0.5); }
+    .btn.secondary{
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow:none;
+      color:var(--text);
+    }
+
+    /* HERO GRID */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      background: var(--panel);
+      border:1px solid var(--line);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+    }
+    .hero{
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:-80px -120px auto auto;
+      width:320px; height:320px;
+      background: radial-gradient(circle at 30% 30%, rgba(77,163,255,0.35), transparent 65%),
+                  radial-gradient(circle at 60% 70%, rgba(124,92,255,0.28), transparent 60%);
+      filter: blur(10px);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height:1.06;
+      letter-spacing:-0.6px;
+    }
+    .tagline{ color:var(--muted); font-size:16px; line-height:1.55; max-width:62ch; }
+    .pills{ display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color:rgba(255,255,255,0.80);
+      font-size:13px;
+    }
+    .hero-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+
+    /* RIGHT SIDE PANEL */
+    .side{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .mini{
+      padding:16px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    .mini h3{ margin:0 0 8px; font-size:14px; color:rgba(255,255,255,0.85); letter-spacing:0.2px; }
+    .mini p{ margin:0; font-size:14px; color:var(--muted); line-height:1.5; }
+    .mini a{ color:rgba(77,163,255,0.95); text-decoration:underline; text-underline-offset:3px; }
+
+    /* PHOTO */
+    .photoWrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px;
+    }
+    .photo{
+      width:100%;
+      max-width:360px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.40);
+    }
+    .photoHint{
+      margin-top:10px;
+      font-size:12px;
+      color: var(--muted);
+      line-height:1.45;
+      text-align:center;
+    }
+
+    /* SECTIONS */
+    section{ margin-top:18px; }
+    .section-card{ padding:22px; }
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:14px;
+    }
+    .section-title h2{ margin:0; font-size:18px; letter-spacing:0.2px; }
+    .section-title p{ margin:0; color:var(--muted); font-size:14px; }
+
+    .cols{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    .list{ display:flex; flex-wrap:wrap; gap:10px; margin:0; padding:0; list-style:none; }
+    .list li{
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color:rgba(255,255,255,0.84);
+      font-size:14px;
+    }
+
+    .projects{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    .project{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,0.14);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+      position:relative;
+      overflow:hidden;
+      min-height:160px;
+    }
+    .project:before{
+      content:"";
+      position:absolute; inset:auto -40px -60px auto;
+      width:220px; height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(77,163,255,0.26), transparent 60%);
+      transform: rotate(-12deg);
+      filter: blur(6px);
+      pointer-events:none;
+    }
+    .project h3{ margin:0 0 8px; font-size:16px; }
+    .project p{ margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.5; }
+    .meta{ display:flex; gap:10px; flex-wrap:wrap; position:relative; z-index:1; }
+    .meta span{
+      font-size:12px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(77,163,255,0.22);
+      background: rgba(77,163,255,0.08);
+      color: rgba(255,255,255,0.86);
+    }
+
+    .timeline{ display:flex; flex-direction:column; gap:12px; }
+    .role{
+      padding:16px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+    }
+    .role strong{ display:block; margin-bottom:4px; }
+    .role .small{ color:var(--muted); font-size:13px; }
+    .role ul{ margin:10px 0 0; padding-left:18px; color:rgba(255,255,255,0.80); }
+    .role li{ margin:6px 0; line-height:1.45; }
+
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .form{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    input, textarea{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.16);
+      background: rgba(10,14,30,0.35);
+      color:var(--text);
+      padding:12px 12px;
+      outline:none;
+      font-size:14px;
+    }
+    textarea{ min-height:120px; resize:vertical; }
+
+    .footer{
+      margin-top:22px;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+      padding:22px 8px 0;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      padding:4px 7px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.80);
+      display:inline-block;
+    }
+
+    @media (max-width: 920px){
+      .grid{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+      .cols{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
+      .links a{ padding:9px 10px; }
+      .photo{ max-width: 420px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <!-- NAV -->
+    <div class="nav">
+      <div class="brand">
+        <div class="dot" aria-hidden="true"></div>
+        <div>
+          <strong>Shino Shamit</strong>
+          <span>Cybersecurity • SOC • Detection</span>
+        </div>
+      </div>
+      <div class="links" aria-label="Primary navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="grid">
+      <div class="card hero">
+        <h1>Cybersecurity-focused analyst building practical, measurable defense.</h1>
+        <p class="tagline">
+          I’m <strong>Shino Shamit</strong> — focused on SOC fundamentals, detection engineering, threat hunting,
+          and incident response workflows. I enjoy turning noisy data into clear signals,
+          writing concise investigation notes, and improving security posture through repeatable processes.
+        </p>
+
+        <div class="pills" aria-label="Quick highlights">
+          <span class="pill">Melbourne, AU</span>
+          <span class="pill">Cyber Security Grad (RMIT)</span>
+          <span class="pill">Threat Hunting</span>
+          <span class="pill">Detection-as-Code</span>
+          <span class="pill">IR & Triage</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn secondary" href="#contact">Contact Me</a>
+          <!-- Replace with your actual resume link -->
+          <a class="btn secondary" href="#" onclick="alert('Replace this with your resume PDF link!')">Download Resume</a>
+        </div>
+      </div>
+
+      <div class="card side">
+        <div class="mini photoWrap">
+          <!-- Put shino.jpeg in the same folder as index.html -->
+          <img class="photo" src="shino.jpeg" alt="Photo of Shino Shamit" />
+        </div>
+        <div class="photoHint">
+          If your photo file has a different name (e.g. <span class="kbd">.jpeg</span>), update the <span class="kbd">src</span> value.
+        </div>
+
+        <div class="mini">
+          <h3>What I’m building</h3>
+          <p>A hands-on security lab and a portfolio of detections + incident investigations with clear write-ups and outcomes.</p>
+        </div>
+
+        <div class="mini">
+          <h3>Links</h3>
+          <p>
+            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a> ·
+            <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a> ·
+            <a href="mailto:yourname@email.com">Email</a>
+          </p>
+          <p style="margin-top:10px;">Update these URLs in the HTML.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="card section-card">
+      <div class="section-title">
+        <h2>About</h2>
+        <p>How I think and what I focus on</p>
+      </div>
+
+      <div class="cols">
+        <div>
+          <p style="margin:0; color:rgba(255,255,255,0.82); line-height:1.7;">
+            I’m focused on practical cybersecurity work: triage, investigation, threat hunting, and improving detections.
+            I like working with frameworks such as <strong>MITRE ATT&CK</strong> and <strong>OWASP</strong> to structure thinking,
+            map behaviors to techniques, and document clear actions for containment and remediation.
+          </p>
+          <p style="margin:12px 0 0; color:var(--muted); line-height:1.7;">
+            I value clean, audit-ready documentation: what happened, how we know, impact, and what we changed to prevent a repeat.
+          </p>
+        </div>
+
+        <div class="mini">
+          <h3>Quick facts</h3>
+          <p><span class="kbd">Open to</span> SOC / Junior Analyst / Detection / Threat Hunting roles</p>
+          <p style="margin-top:8px;"><span class="kbd">Strengths</span> Investigation thinking, rule tuning, clear reporting</p>
+          <p style="margin-top:8px;"><span class="kbd">Interests</span> SIEM detections, IR playbooks, threat intel, automation</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="card section-card">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <p>Tools and areas I work with</p>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h3 style="margin:0 0 10px; font-size:14px; color:rgba(255,255,255,0.85);">Security Operations</h3>
+          <ul class="list">
+            <li>Alert triage & escalation</li>
+            <li>Incident response basics</li>
+            <li>Threat hunting workflows</li>
+            <li>MITRE ATT&CK mapping</li>
+            <li>Detection rule tuning</li>
+            <li>Runbooks & playbooks</li>
+            <li>Log analysis</li>
+            <li>Evidence & timelines</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 style="margin:0 0 10px; font-size:14px; color:rgba(255,255,255,0.85);">Tools & Technical</h3>
+          <ul class="list">
+            <li>Wireshark</li>
+            <li>Nmap</li>
+            <li>Burp Suite</li>
+            <li>SQLmap</li>
+            <li>Metasploit / Armitage</li>
+            <li>Snort (IDS/IPS)</li>
+            <li>PowerShell & scripting</li>
+            <li>Linux fundamentals</li>
+            <li>OWASP Top 10</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="card section-card">
+      <div class="section-title">
+        <h2>Projects</h2>
+      </div>
+
+      <div class="projects">
+        <div class="project">
+          <h3>Home SOC Lab</h3>
+          <p>Built a repeatable lab to generate logs, simulate suspicious activity, and practice triage + investigation with structured notes.</p>
+          <div class="meta">
+            <span>Virtualization</span><span>Linux</span><span>Logging</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Detection Engineering Practice</h3>
+          <p>Drafted detections mapped to ATT&CK, created investigation checklists, and tuned rule logic to reduce false positives.</p>
+          <div class="meta">
+            <span>ATT&CK</span><span>Rule tuning</span><span>Playbooks</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Web Security Labs</h3>
+          <p>Practiced SQLi, XSS, and access-control issues. Documented findings in a clear, report-like format with mitigations.</p>
+          <div class="meta">
+            <span>Burp</span><span>SQLi</span><span>XSS</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Network Analysis Drills</h3>
+          <p>Analyzed packet captures, identified suspicious traffic patterns, and wrote concise summaries of what happened and why.</p>
+          <div class="meta">
+            <span>Wireshark</span><span>PCAP</span><span>IOCs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="card section-card">
+      <div class="section-title">
+        <h2>Experience</h2>
+        <p>What I’ve done (edit to match your resume)</p>
+      </div>
+
+      <div class="timeline">
+        <div class="role">
+          <strong>Cybersecurity Projects / Coursework</strong>
+          <div class="small">Melbourne • 2024 — Present</div>
+          <ul>
+            <li>Hands-on practice across web security, network analysis, and defensive workflows using real security tools.</li>
+            <li>Produced structured documentation: findings, impact, recommended mitigations, and verification steps.</li>
+            <li>Developed practical understanding of triage, investigation steps, and mapping behavior to ATT&CK techniques.</li>
+          </ul>
+        </div>
+
+        <div class="role">
+          <strong>Security Lab Building (Personal)</strong>
+          <div class="small">Detection • Hunting • Repeatable scenarios</div>
+          <ul>
+            <li>Set up lab environments to safely test attack/defense scenarios and build intuition for logs and alerts.</li>
+            <li>Created checklists and short playbooks for common alerts (authentication anomalies, suspicious network activity, web attacks).</li>
+            <li>Iterated on rules/queries based on results to reduce noise and improve signal quality.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card section-card">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <p>Let’s connect</p>
+      </div>
+
+      <div class="contact">
+        <div class="mini">
+          <h3>Get in touch</h3>
+          <p style="margin-bottom:10px;">
+            Email: <a href="mailto:yourname@email.com">yourname@email.com</a><br />
+            LinkedIn: <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">linkedin.com/in/yourprofile</a><br />
+            GitHub: <a href="https://github.com" target="_blank" rel="noreferrer">github.com/yourusername</a>
+          </p>
+          <p>Use the form to open your email app with a pre-filled message.</p>
+        </div>
+
+        <form class="form" onsubmit="return sendEmail(event)">
+          <input id="name" name="name" placeholder="Your name" required />
+          <input id="email" name="email" type="email" placeholder="Your email" required />
+          <textarea id="message" name="message" placeholder="Your message" required></textarea>
+          <button class="btn" type="submit">Send</button>
+          <div style="color:var(--muted); font-size:12px; line-height:1.5;">
+           
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Shino Shamit · Cybersecurity Portfolio · Designed and inspired by OpenAI
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function sendEmail(e){
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const subject = encodeURIComponent(`Portfolio message from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n`);
+      // Replace with YOUR email address:
+      const to = "yourname@email.com";
+
+      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+      return false;
+    }
+  </script>
+</body>
+</html>
