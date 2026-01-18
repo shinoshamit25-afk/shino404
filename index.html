@@ -141,16 +141,16 @@
       transform: rotate(12deg);
       pointer-events:none;
     }
-    .hero-callout{
-      margin-top: 14px;
-      padding: 14px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.78);
-      line-height: 1.6;
-    }
-
+      .hero-bullets{
+        margin: 14px 0 0;
+        padding-left: 18px;
+        color: rgba(255,255,255,0.78);
+        line-height: 1.55;
+      }
+      .hero-bullets li{
+        margin: 8px 0;
+      }
+   
     h1{
       margin:0 0 10px;
       font-size: clamp(30px, 4vw, 44px);
@@ -377,13 +377,15 @@
       <div class="card hero">
         <h1>Curiosity • Clarity • Control</h1>
         <p class="tagline">
-          Hey there! I am <strong>Shino Shamit</strong> a Cybersec Grad, who likes to break things, ethically ;) and then report it. 
-          I enjoy turning messy alerts, strange traffic, 
+          Hey there! I am <strong>Shino Shamit</strong> a Cybersec Grad, who likes to break things, ethically ;)   and then 
+          write the report that explains exactly what happened.
         </p>
-       <div class="hero-callout">
-        I enjoy working in the messy middle — where alerts are noisy, traffic is weird, and the answer isn’t obvious.
-        My job is to turn “that’s strange…” into evidence, clarity, and action.
-      </div>
+
+        <ul class="hero-bullets" aria-label="What I focus on">
+          <li>Turn messy alerts and weird traffic into clear, evidence-based timelines</li>
+          <li>Build detections, tune signal quality, and map behavior to MITRE ATT&CK</li>
+          <li>Document findings so incidents lead to stronger defenses — not repeat incidents</li>
+        </ul>
         <div class="spacer"></div>
         <div class="pills" aria-label="Quick highlights">
           <span class="pill">Melbourne, AU</span>
@@ -594,6 +596,7 @@
   </script>
 </body>
 </html>
+
 
 
 
